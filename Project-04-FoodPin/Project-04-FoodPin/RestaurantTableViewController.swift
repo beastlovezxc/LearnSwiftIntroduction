@@ -46,6 +46,24 @@ class RestaurantTableViewController: UITableViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    /*!
+    
+    删除表格项
+    
+    */
+//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//            restaurantNames.removeAtIndex(indexPath.row)
+//            restaurantLocations.removeAtIndex(indexPath.row)
+//            restaurantTypes.removeAtIndex(indexPath.row)
+//            restaurantIsVisited.removeAtIndex(indexPath.row)
+//            restaurantImages.removeAtIndex(indexPath.row)
+//        }
+//        // 一种删除表格项后更新视图的方法，不过需要全部项更新
+//      //  tableView.reloadData()
+//        // 另一种只在视图中删除一个表格的方法
+//        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//    }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -79,5 +97,34 @@ class RestaurantTableViewController: UITableViewController {
         
         //取消选中表格背景色
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        // Social Sharing Button
+        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share", handler: {
+            (action, indexPath) -> Void in
+            let defaultText = "Just checking in at " + self.restaurantNames[indexPath.row]
+            if let imageToShare = UIImage(named: self.restaurantImages[indexPath.row]) {
+                let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                self.presentViewController(activityController, animated: true, completion: nil)
+            }
+        })
+        shareAction.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
+        // Delete Button
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler: {
+            (action, indexPath) -> Void in
+            
+            // Delete the row from the data source
+            self.restaurantNames.removeAtIndex(indexPath.row)
+            self.restaurantLocations.removeAtIndex(indexPath.row)
+            self.restaurantTypes.removeAtIndex(indexPath.row)
+            self.restaurantIsVisited.removeAtIndex(indexPath.row)
+            self.restaurantImages.removeAtIndex(indexPath.row)
+            
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        })
+        deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
+        return [deleteAction, shareAction]
     }
 }
