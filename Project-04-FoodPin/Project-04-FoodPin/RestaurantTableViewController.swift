@@ -35,19 +35,21 @@ class RestaurantTableViewController: UITableViewController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       // 删除返回按键的title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        // home页面下拉时隐藏navigationbar
         navigationController?.hidesBarsOnSwipe = true
     }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! RestaurantTableViewCell
         
+        // home 页面显示饭店信息
         cell.nameLabel.text = restaurants[indexPath.row].name
         cell.locationLabel.text = restaurants[indexPath.row].location
         cell.typeLabel.text = restaurants[indexPath.row].type
@@ -55,6 +57,7 @@ class RestaurantTableViewController: UITableViewController {
         cell.thumbnailImageView.layer.cornerRadius = 30.0
         cell.thumbnailImageView.clipsToBounds = true
         
+        // 表格附件标记
         if restaurants[indexPath.row].isVisited {
             cell.accessoryType = .Checkmark
         } else {
@@ -93,6 +96,12 @@ class RestaurantTableViewController: UITableViewController {
         // 另一种只在视图中删除一个表格的方法
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
     }
+    /*!
+    选中表格后弹出电话以及是否到过按钮
+    
+    - parameter tableView: <#tableView description#>
+    - parameter indexPath: <#indexPath description#>
+    */
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -129,6 +138,14 @@ class RestaurantTableViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
+    /*!
+    右滑表格弹出删除和分享按钮
+    
+    - parameter tableView: <#tableView description#>
+    - parameter indexPath: <#indexPath description#>
+    
+    - returns: <#return value description#>
+    */
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         // Social Sharing Button
@@ -152,12 +169,18 @@ class RestaurantTableViewController: UITableViewController {
 //            self.restaurantIsVisited.removeAtIndex(indexPath.row)
 //            self.restaurantImages.removeAtIndex(indexPath.row)
            self.restaurants.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+           self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         })
         deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
         return [deleteAction, shareAction]
     }
     
+    /*!
+    设置segue中的传递参数
+    
+    - parameter segue:  <#segue description#>
+    - parameter sender: <#sender description#>
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
