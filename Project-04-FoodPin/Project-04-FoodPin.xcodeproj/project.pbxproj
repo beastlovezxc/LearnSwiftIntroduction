@@ -13,7 +13,9 @@
 		07CE048F1C903BCA001D2F0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07CE048D1C903BCA001D2F0B /* LaunchScreen.storyboard */; };
 		07CE04971C903CB2001D2F0B /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04961C903CB2001D2F0B /* RestaurantTableViewController.swift */; };
 		07CE04991C90440D001D2F0B /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04981C90440D001D2F0B /* RestaurantTableViewCell.swift */; };
-		07CE04BD1C915574001D2F0B /* RestaurantDatailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04BC1C915574001D2F0B /* RestaurantDatailViewController.swift */; };
+		07CE04BD1C915574001D2F0B /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04BC1C915574001D2F0B /* RestaurantDetailViewController.swift */; };
+		07CE04BF1C916811001D2F0B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04BE1C916811001D2F0B /* Restaurant.swift */; };
+		07CE04C11C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04C01C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,9 @@
 		07CE04901C903BCA001D2F0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07CE04961C903CB2001D2F0B /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
 		07CE04981C90440D001D2F0B /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
-		07CE04BC1C915574001D2F0B /* RestaurantDatailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDatailViewController.swift; sourceTree = "<group>"; };
+		07CE04BC1C915574001D2F0B /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
+		07CE04BE1C916811001D2F0B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		07CE04C01C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +69,9 @@
 				07CE04901C903BCA001D2F0B /* Info.plist */,
 				07CE04961C903CB2001D2F0B /* RestaurantTableViewController.swift */,
 				07CE04981C90440D001D2F0B /* RestaurantTableViewCell.swift */,
-				07CE04BC1C915574001D2F0B /* RestaurantDatailViewController.swift */,
+				07CE04BC1C915574001D2F0B /* RestaurantDetailViewController.swift */,
+				07CE04BE1C916811001D2F0B /* Restaurant.swift */,
+				07CE04C01C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift */,
 			);
 			path = "Project-04-FoodPin";
 			sourceTree = "<group>";
@@ -142,9 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07CE04BF1C916811001D2F0B /* Restaurant.swift in Sources */,
 				07CE04971C903CB2001D2F0B /* RestaurantTableViewController.swift in Sources */,
 				07CE04991C90440D001D2F0B /* RestaurantTableViewCell.swift in Sources */,
-				07CE04BD1C915574001D2F0B /* RestaurantDatailViewController.swift in Sources */,
+				07CE04C11C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift in Sources */,
+				07CE04BD1C915574001D2F0B /* RestaurantDetailViewController.swift in Sources */,
 				07CE04851C903BCA001D2F0B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +301,7 @@
 				07CE04951C903BCA001D2F0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
