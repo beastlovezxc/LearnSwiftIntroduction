@@ -64,40 +64,40 @@ class RestaurantTableViewController: UITableViewController {
 //        // 另一种只在视图中删除一个表格的方法
 //        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 //    }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        optionMenu.addAction(cancelAction)
-        
-        let callActionHandler = { (action: UIAlertAction!) -> Void in let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not avaliable yet. Please retry later", preferredStyle: .Alert)
-            alertMessage.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(alertMessage, animated: true, completion: nil)
-        }
-        let callAction = UIAlertAction(title: "Call" + "123-000-\(indexPath.row)", style: UIAlertActionStyle.Default, handler: callActionHandler)
-        optionMenu.addAction(callAction)
-        if restaurantIsVisited[indexPath.row] {
-            let isVisitedAction = UIAlertAction(title: "I've not bean here", style: .Default, handler: {
-                (action: UIAlertAction) -> Void in
-                let cell = tableView.cellForRowAtIndexPath(indexPath)
-                cell?.accessoryType = .None
-                self.restaurantIsVisited[indexPath.row] = false
-            })
-            optionMenu.addAction(isVisitedAction)
-        } else {
-            let isVisitedAction = UIAlertAction(title: "I've bean here", style: .Default, handler: {
-                (action: UIAlertAction!) -> Void in
-                let cell = tableView.cellForRowAtIndexPath(indexPath)
-                cell?.accessoryType = .Checkmark
-                self.restaurantIsVisited[indexPath.row] = true
-            })
-            optionMenu.addAction(isVisitedAction)
-        }
-        
-                self.presentViewController(optionMenu, animated: true, completion: nil)
-        
-        //取消选中表格背景色
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .ActionSheet)
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+//        optionMenu.addAction(cancelAction)
+//        
+//        let callActionHandler = { (action: UIAlertAction!) -> Void in let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not avaliable yet. Please retry later", preferredStyle: .Alert)
+//            alertMessage.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//            self.presentViewController(alertMessage, animated: true, completion: nil)
+//        }
+//        let callAction = UIAlertAction(title: "Call" + "123-000-\(indexPath.row)", style: UIAlertActionStyle.Default, handler: callActionHandler)
+//        optionMenu.addAction(callAction)
+//        if restaurantIsVisited[indexPath.row] {
+//            let isVisitedAction = UIAlertAction(title: "I've not bean here", style: .Default, handler: {
+//                (action: UIAlertAction) -> Void in
+//                let cell = tableView.cellForRowAtIndexPath(indexPath)
+//                cell?.accessoryType = .None
+//                self.restaurantIsVisited[indexPath.row] = false
+//            })
+//            optionMenu.addAction(isVisitedAction)
+//        } else {
+//            let isVisitedAction = UIAlertAction(title: "I've bean here", style: .Default, handler: {
+//                (action: UIAlertAction!) -> Void in
+//                let cell = tableView.cellForRowAtIndexPath(indexPath)
+//                cell?.accessoryType = .Checkmark
+//                self.restaurantIsVisited[indexPath.row] = true
+//            })
+//            optionMenu.addAction(isVisitedAction)
+//        }
+//        
+//                self.presentViewController(optionMenu, animated: true, completion: nil)
+//        
+//        //取消选中表格背景色
+//        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+//    }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
@@ -126,5 +126,17 @@ class RestaurantTableViewController: UITableViewController {
         })
         deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
         return [deleteAction, shareAction]
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showRestaurantDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destinationViewController as! RestaurantDatailViewController
+                destinationController.restaurantImage = restaurantImages[indexPath.row]
+                destinationController.restaurantType = restaurantTypes[indexPath.row]
+                destinationController.restaurantLocation = restaurantLocations[indexPath.row]
+                destinationController.restaurantName = restaurantNames[indexPath.row]
+            }
+        }
     }
 }

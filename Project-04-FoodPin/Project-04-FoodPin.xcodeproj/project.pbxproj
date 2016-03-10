@@ -13,6 +13,7 @@
 		07CE048F1C903BCA001D2F0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07CE048D1C903BCA001D2F0B /* LaunchScreen.storyboard */; };
 		07CE04971C903CB2001D2F0B /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04961C903CB2001D2F0B /* RestaurantTableViewController.swift */; };
 		07CE04991C90440D001D2F0B /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04981C90440D001D2F0B /* RestaurantTableViewCell.swift */; };
+		07CE04BD1C915574001D2F0B /* RestaurantDatailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04BC1C915574001D2F0B /* RestaurantDatailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		07CE04901C903BCA001D2F0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07CE04961C903CB2001D2F0B /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
 		07CE04981C90440D001D2F0B /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		07CE04BC1C915574001D2F0B /* RestaurantDatailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDatailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				07CE04901C903BCA001D2F0B /* Info.plist */,
 				07CE04961C903CB2001D2F0B /* RestaurantTableViewController.swift */,
 				07CE04981C90440D001D2F0B /* RestaurantTableViewCell.swift */,
+				07CE04BC1C915574001D2F0B /* RestaurantDatailViewController.swift */,
 			);
 			path = "Project-04-FoodPin";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			files = (
 				07CE04971C903CB2001D2F0B /* RestaurantTableViewController.swift in Sources */,
 				07CE04991C90440D001D2F0B /* RestaurantTableViewCell.swift in Sources */,
+				07CE04BD1C915574001D2F0B /* RestaurantDatailViewController.swift in Sources */,
 				07CE04851C903BCA001D2F0B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
