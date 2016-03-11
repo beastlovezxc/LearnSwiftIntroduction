@@ -86,6 +86,38 @@
             </objects>
             <point key="canvasLocation" x="1115" y="319"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="X62-UN-Vlc">
+            <objects>
+                <viewController id="WhB-JC-3Mg" customClass="MapViewController" customModule="Project_04_FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DwX-E7-hf4"/>
+                        <viewControllerLayoutGuide type="bottom" id="fic-tZ-81Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wEx-10-4Wa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FYG-La-cjb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FYG-La-cjb" secondAttribute="trailing" id="Llv-vj-7Aa"/>
+                            <constraint firstItem="FYG-La-cjb" firstAttribute="leading" secondItem="wEx-10-4Wa" secondAttribute="leading" id="gq3-iY-Y0y"/>
+                            <constraint firstItem="FYG-La-cjb" firstAttribute="bottom" secondItem="fic-tZ-81Z" secondAttribute="top" id="wIl-85-iDP"/>
+                            <constraint firstItem="FYG-La-cjb" firstAttribute="top" secondItem="wEx-10-4Wa" secondAttribute="top" id="yFd-7t-O4P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="FYG-La-cjb" id="cso-J4-Pmt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zVM-Nf-Srb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2219" y="-402"/>
+        </scene>
         <!--Restaurant Detail View Controller-->
         <scene sceneID="hsE-oM-E9C">
             <objects>
@@ -171,14 +203,34 @@
                                     <segue destination="lE6-Eq-oLk" kind="presentation" identifier="showReview" id="HDM-df-dAc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OlS-tR-57A">
+                                <rect key="frame" x="545" y="120" width="40" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.077609700719999994" blue="0.0089488840569999992" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ODz-ex-ekj"/>
+                                    <constraint firstAttribute="width" constant="40" id="jnb-JU-bnr"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="map"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="WhB-JC-3Mg" kind="show" identifier="showMap" id="u1t-rr-wYs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vXZ-sS-9PW" firstAttribute="leading" secondItem="pAP-oX-fta" secondAttribute="leadingMargin" id="9iK-qU-d0x"/>
                             <constraint firstItem="tv7-rK-GNH" firstAttribute="top" secondItem="vXZ-sS-9PW" secondAttribute="bottom" id="MPm-1f-HbN"/>
+                            <constraint firstItem="OlS-tR-57A" firstAttribute="top" secondItem="vRO-IQ-Ben" secondAttribute="bottom" constant="8" id="bq6-sh-1az"/>
                             <constraint firstItem="vXZ-sS-9PW" firstAttribute="leading" secondItem="pAP-oX-fta" secondAttribute="leadingMargin" id="dNS-Bt-aHS"/>
                             <constraint firstItem="vXZ-sS-9PW" firstAttribute="leading" secondItem="pAP-oX-fta" secondAttribute="leadingMargin" constant="-20" id="n37-im-mDE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vRO-IQ-Ben" secondAttribute="trailing" constant="-7" id="q0v-8W-VKT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OlS-tR-57A" secondAttribute="trailing" constant="-5" id="qMf-Qi-HbY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vXZ-sS-9PW" secondAttribute="trailing" constant="-20" id="u1m-i8-b2m"/>
                             <constraint firstItem="vXZ-sS-9PW" firstAttribute="top" secondItem="pAP-oX-fta" secondAttribute="topMargin" id="zwr-ji-m9e"/>
                         </constraints>
@@ -339,6 +391,7 @@
         <image name="dislike" width="84" height="84"/>
         <image name="good" width="256" height="256"/>
         <image name="great" width="256" height="256"/>
+        <image name="map" width="48" height="48"/>
         <image name="rating" width="256" height="256"/>
     </resources>
 </document>
