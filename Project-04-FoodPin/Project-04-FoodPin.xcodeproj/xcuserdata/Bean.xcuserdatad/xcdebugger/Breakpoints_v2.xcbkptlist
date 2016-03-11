@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Project-04-FoodPin/RestaurantTableViewController.swift"
+            timestampString = "479353287.493675"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "restaurants"
+            landmarkType = "19">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Project_04_FoodPin.RestaurantTableViewController.init (Project_04_FoodPin.RestaurantTableViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; Project_04_FoodPin.RestaurantTableViewController"
+                  moduleName = "Project-04-FoodPin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bean/LearnSwiftIntroduction/Project-04-FoodPin/Project-04-FoodPin/RestaurantTableViewController.swift"
+                  timestampString = "479353413.141075"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Project_04_FoodPin.RestaurantTableViewController.init (Project_04_FoodPin.RestaurantTableViewController.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Project_04_FoodPin.RestaurantTableViewController&gt;"
+                  moduleName = "Project-04-FoodPin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bean/LearnSwiftIntroduction/Project-04-FoodPin/Project-04-FoodPin/RestaurantTableViewController.swift"
+                  timestampString = "479353413.14132"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

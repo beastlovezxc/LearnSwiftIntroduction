@@ -16,3 +16,7 @@
 * 修改背景颜色
 * 增加下拉隐藏navigationbar功能
 * 修改statusbar颜色
+
+## 3.11 更新
+
+* 增加Self sizing cells 功能，对于长文本自动换行

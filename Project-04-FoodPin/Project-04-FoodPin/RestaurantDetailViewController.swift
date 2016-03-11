@@ -22,6 +22,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         
         restaurantImageView.image = UIImage(named: restaurant.image)
         tableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.2)
+        // Self Sizing Cells   表格自动适应调整大小
+        tableView.estimatedRowHeight = 36.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         // 去除没有内容的表格分割线
         tableView.tableFooterView = UIView(frame: CGRectZero)
         // 为分割线调整颜色
@@ -54,7 +57,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             cell.valueLabel.text = restaurant.location
         case 3:
             cell.fieldLabel.text = "Phone"
-            cell.valueLabel.text = restaurant.phone
+            cell.valueLabel.text = restaurant.phoneNumber
         case 4:
             cell.fieldLabel.text = "Been here"
             cell.valueLabel.text = (restaurant.isVisited) ? "Yes,I've been here before" : "No"
