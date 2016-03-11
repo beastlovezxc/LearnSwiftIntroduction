@@ -184,6 +184,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ratingButton" destination="vRO-IQ-Ben" id="vzi-CX-iek"/>
                         <outlet property="restaurantImageView" destination="t4J-cl-jRJ" id="gyk-XY-d9H"/>
                         <outlet property="tableView" destination="vXZ-sS-9PW" id="XB8-we-dCU"/>
                     </connections>
@@ -192,10 +193,10 @@
             </objects>
             <point key="canvasLocation" x="1906" y="369"/>
         </scene>
-        <!--View Controller-->
+        <!--Review View Controller-->
         <scene sceneID="TJk-39-6vX">
             <objects>
-                <viewController id="lE6-Eq-oLk" sceneMemberID="viewController">
+                <viewController id="lE6-Eq-oLk" customClass="ReviewViewController" customModule="Project_04_FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fkb-l7-bNW"/>
                         <viewControllerLayoutGuide type="bottom" id="4Nd-i1-CXQ"/>
@@ -219,7 +220,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nmc-ua-0Ez">
                                 <rect key="frame" x="185" y="174" width="230" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3e-kH-vLN">
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3e-kH-vLN">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <color key="backgroundColor" red="1" green="0.077609700719999994" blue="0.0089488840569999992" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -233,8 +234,11 @@
                                                 <integer key="value" value="35"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ratingSelected:" destination="lE6-Eq-oLk" eventType="touchUpInside" id="ngI-St-3YY"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTg-Fb-RUA">
+                                    <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTg-Fb-RUA">
                                         <rect key="frame" x="80" y="0.0" width="70" height="70"/>
                                         <color key="backgroundColor" red="1" green="0.077609700719999994" blue="0.0089488840569999992" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -248,8 +252,11 @@
                                                 <integer key="value" value="35"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ratingSelected:" destination="lE6-Eq-oLk" eventType="touchUpInside" id="cJu-N7-xbl"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RR-L7-fzg">
+                                    <button opaque="NO" tag="300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RR-L7-fzg">
                                         <rect key="frame" x="160" y="0.0" width="70" height="70"/>
                                         <color key="backgroundColor" red="1" green="0.077609700719999994" blue="0.0089488840569999992" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -263,6 +270,9 @@
                                                 <integer key="value" value="35"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ratingSelected:" destination="lE6-Eq-oLk" eventType="touchUpInside" id="hOK-AM-vol"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -275,7 +285,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="close"/>
                                 <connections>
-                                    <segue destination="ILb-wY-Js2" kind="unwind" unwindAction="close:" id="aO8-nc-lpz"/>
+                                    <segue destination="ILb-wY-Js2" kind="unwind" identifier="unwindToDetailView" unwindAction="close:" id="aO8-nc-lpz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -294,6 +304,10 @@
                             <constraint firstItem="9i7-Lu-4PK" firstAttribute="top" secondItem="Fkb-l7-bNW" secondAttribute="bottom" constant="47" id="yHg-8h-cvv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="32K-5a-EzD" id="GCK-4k-Wlv"/>
+                        <outlet property="ratingStackView" destination="nmc-ua-0Ez" id="Rgb-XP-Dya"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0q-Gg-hkG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ILb-wY-Js2" userLabel="Exit" sceneMemberID="exit"/>

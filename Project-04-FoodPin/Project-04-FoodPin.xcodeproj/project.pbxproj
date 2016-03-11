@@ -16,6 +16,7 @@
 		07CE04BD1C915574001D2F0B /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04BC1C915574001D2F0B /* RestaurantDetailViewController.swift */; };
 		07CE04BF1C916811001D2F0B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04BE1C916811001D2F0B /* Restaurant.swift */; };
 		07CE04C11C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04C01C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift */; };
+		07CE04C31C9284CE001D2F0B /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE04C21C9284CE001D2F0B /* ReviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		07CE04BC1C915574001D2F0B /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		07CE04BE1C916811001D2F0B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		07CE04C01C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTableViewCell.swift; sourceTree = "<group>"; };
+		07CE04C21C9284CE001D2F0B /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				07CE04BC1C915574001D2F0B /* RestaurantDetailViewController.swift */,
 				07CE04BE1C916811001D2F0B /* Restaurant.swift */,
 				07CE04C01C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift */,
+				07CE04C21C9284CE001D2F0B /* ReviewViewController.swift */,
 			);
 			path = "Project-04-FoodPin";
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			files = (
 				07CE04BF1C916811001D2F0B /* Restaurant.swift in Sources */,
 				07CE04971C903CB2001D2F0B /* RestaurantTableViewController.swift in Sources */,
+				07CE04C31C9284CE001D2F0B /* ReviewViewController.swift in Sources */,
 				07CE04991C90440D001D2F0B /* RestaurantTableViewCell.swift in Sources */,
 				07CE04C11C918ED1001D2F0B /* RestaurantDetailTableViewCell.swift in Sources */,
 				07CE04BD1C915574001D2F0B /* RestaurantDetailViewController.swift in Sources */,

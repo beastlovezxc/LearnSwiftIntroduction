@@ -9,16 +9,20 @@
 import UIKit
 
 class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    var restaurant: Restaurant!
     @IBOutlet var restaurantImageView: UIImageView!
-    @IBOutlet var restaurantNameLabel: UILabel!
-    @IBOutlet var restaurantLocationLabel: UILabel!
-    @IBOutlet var restaurantTypeLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var ratingButton: UIButton!
     @IBAction func close(segue: UIStoryboardSegue) {
-        
+        if let reviewViewController = segue.sourceViewController as? ReviewViewController {
+            if let rating = reviewViewController.rating {
+                restaurant.rating = rating
+                ratingButton.setImage(UIImage(named: rating), forState: UIControlState.Normal)
+            }
+        }
     }
     
-    var restaurant: Restaurant!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,11 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         // 为分割线调整颜色
         tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
         title = restaurant.name
+        
+        // rating 图标
+        if restaurant.rating != "" {
+            ratingButton.setImage(UIImage(named: restaurant.rating), forState: UIControlState.Normal)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
