@@ -14,6 +14,9 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet var restaurantLocationLabel: UILabel!
     @IBOutlet var restaurantTypeLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBAction func close(segue: UIStoryboardSegue) {
+        
+    }
     
     var restaurant: Restaurant!
     
