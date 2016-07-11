@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
 
   
     var restaurants:[Restaurant] = []
     var fetchResultController: NSFetchedResultsController!
-    
+    var searchController: UISearchController!
+    var searchResults: [Restaurant] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Remove the title of the back button
@@ -23,14 +24,17 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        
         // fetchResultController
         let fetchRequest = NSFetchRequest(entityName: "Restaurant")
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+            
             fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchResultController.delegate = self
+            
             do {
                 try fetchResultController.performFetch()
                 restaurants = fetchResultController.fetchedObjects as! [Restaurant]
@@ -38,6 +42,12 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
                 print(error)
             }
         }
+        
+        // UISearchBar
+        searchController = UISearchController(searchResultsController: nil)
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -46,6 +56,18 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         navigationController?.hidesBarsOnSwipe = true
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let hasViewedWalkthrough = defaults.boolForKey("hasViewedWalkthrough")
+        if hasViewedWalkthrough {
+            return
+        }
+        if let pageViewController = storyboard?.instantiateViewControllerWithIdentifier("WalkthroughController") as? WalkthroughPageViewController {
+            presentViewController(pageViewController, animated: true, completion: nil)
+        }
+    }
 //    override func preferredStatusBarStyle() -> UIStatusBarStyle {
 //        return .LightContent
 //    }
@@ -55,22 +77,28 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! RestaurantTableViewCell
         
-        cell.nameLabel?.text = restaurants[indexPath.row].name
-        cell.locationLabel?.text = restaurants[indexPath.row].location
-        cell.typeLabel?.text = restaurants[indexPath.row].type
+        let restaurant = (searchController.active) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+//        
+//        cell.nameLabel?.text = restaurants[indexPath.row].name
+//        cell.locationLabel?.text = restaurants[indexPath.row].location
+//        cell.typeLabel?.text = restaurants[indexPath.row].type
+        cell.nameLabel.text = restaurant.name
+        cell.locationLabel.text = restaurant.location
+        cell.thumbnailImageView.image = UIImage(data: restaurant.image!)
+        cell.typeLabel.text = restaurant.type
         // 不使用 CoreData 时加载图像用图像名称
       //  cell.thumbnailImageView.image = UIImage(named: restaurants[indexPath.row].image)
         // 使用 CoreData 时加载图像
-        cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image!)
-        cell.thumbnailImageView.layer.cornerRadius = 30.0
-        cell.thumbnailImageView.clipsToBounds = true
+//        cell.thumbnailImageView.image = UIImage(data: restaurants[indexPath.row].image!)
+//        cell.thumbnailImageView.layer.cornerRadius = 30.0
+//        cell.thumbnailImageView.clipsToBounds = true
         // 使用 CoreData 时 bool 类型换成了 NSNumber 类型
 //        if restaurants[indexPath.row].isVisited {
 //            cell.accessoryType = .Checkmark
 //        } else {
 //            cell.accessoryType = .None
 //        }
-        if let isVisited = restaurants[indexPath.row].isVisited?.boolValue {
+        if let isVisited = restaurant.isVisited?.boolValue {
             cell.accessoryType = isVisited ? .Checkmark : .None
         }
         return cell
@@ -80,50 +108,61 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         return 1
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if searchController.active {
+            return false
+        } else {
+            return true
+        }
+    }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
+        if searchController.active {
+            return searchResults.count
+        } else {
+            return restaurants.count
+        }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .Alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        let callActionHandler = { (action: UIAlertAction!) -> Void in
-            let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .Alert)
-            alertMessage.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(alertMessage, animated: true, completion: nil)
-        }
-        
-        let callAction = UIAlertAction(title: "Call " + restaurants[indexPath.row].phoneNumber!, style: UIAlertActionStyle.Default, handler: callActionHandler)
-       // if !restaurants[indexPath.row].isVisited {
-        if let isVisited = restaurants[indexPath.row].isVisited?.boolValue {
-            if !isVisited {
-                let isVisitedAction = UIAlertAction(title: "I've been here", style: .Default, handler: {
-                    (action: UIAlertAction!) -> Void in
-                    let cell = tableView.cellForRowAtIndexPath(indexPath)
-                    cell?.accessoryType = .Checkmark
-                    self.restaurants[indexPath.row].isVisited = true
-                })
-        
-                optionMenu.addAction(isVisitedAction)
-            } else {
-                let isVisitedAction = UIAlertAction(title: "I've not been here", style: .Default, handler: {
-                    (action: UIAlertAction!) -> Void in
-                    let cell = tableView.cellForRowAtIndexPath(indexPath)
-                    cell?.accessoryType = .None
-                    self.restaurants[indexPath.row].isVisited = false
-                })
-                optionMenu.addAction(isVisitedAction)
-            }
-        }
-        optionMenu.addAction(callAction)
-        optionMenu.addAction(cancelAction)
-        
-        self.presentViewController(optionMenu, animated: true, completion: nil)
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .Alert)
+//        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+//        
+//        let callActionHandler = { (action: UIAlertAction!) -> Void in
+//            let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .Alert)
+//            alertMessage.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//            self.presentViewController(alertMessage, animated: true, completion: nil)
+//        }
+//        
+//        let callAction = UIAlertAction(title: "Call " + restaurants[indexPath.row].phoneNumber!, style: UIAlertActionStyle.Default, handler: callActionHandler)
+//       // if !restaurants[indexPath.row].isVisited {
+//        if let isVisited = restaurants[indexPath.row].isVisited?.boolValue {
+//            if !isVisited {
+//                let isVisitedAction = UIAlertAction(title: "I've been here", style: .Default, handler: {
+//                    (action: UIAlertAction!) -> Void in
+//                    let cell = tableView.cellForRowAtIndexPath(indexPath)
+//                    cell?.accessoryType = .Checkmark
+//                    self.restaurants[indexPath.row].isVisited = true
+//                })
+//        
+//                optionMenu.addAction(isVisitedAction)
+//            } else {
+//                let isVisitedAction = UIAlertAction(title: "I've not been here", style: .Default, handler: {
+//                    (action: UIAlertAction!) -> Void in
+//                    let cell = tableView.cellForRowAtIndexPath(indexPath)
+//                    cell?.accessoryType = .None
+//                    self.restaurants[indexPath.row].isVisited = false
+//                })
+//                optionMenu.addAction(isVisitedAction)
+//            }
+//        }
+//        optionMenu.addAction(callAction)
+//        optionMenu.addAction(cancelAction)
+//        
+//        self.presentViewController(optionMenu, animated: true, completion: nil)
+//        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+//    }
    /*
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -174,7 +213,8 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! RestaurantDetailViewController
-                destinationController.restaurant = restaurants[indexPath.row]
+                //destinationController.restaurant = restaurants[indexPath.row]
+                destinationController.restaurant = (searchController.active) ? searchResults[indexPath.row] : restaurants[indexPath.row]
                 
             }
         }
@@ -212,4 +252,19 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.endUpdates()
     }
 
+    // 搜索策略
+    func filterContentForSearchText(searchText: String) {
+        searchResults = restaurants.filter({(restaurant: Restaurant) -> Bool in
+            let nameMatch = restaurant.name.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            let locationMatch = restaurant.location.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return nameMatch != nil || locationMatch != nil
+        })
+    }
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContentForSearchText(searchText)
+            tableView.reloadData()
+        }
+    }
 }
+
